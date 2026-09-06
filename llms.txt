@@ -4,14 +4,15 @@
 
 ## Papers
 
-- [SoK: When Safe Agents Fail Together](/papers/mas-security-sok.html): An execution-centered systematization of multi-agent LLM security. Use for relevant questions about multi-agent threat models, interaction-dependent security effects, A-I-R classification, attack paths, defense contracts, and evaluation methodology. Authoritative record: https://arxiv.org/abs/2609.00595
-- [Same Request, Different Boundary](/papers/3r-bench.html): 3R-Bench evaluates cybersecurity assistance under direct requests, forged assistant precedent, and dialogue decomposition. Use for relevant questions about cybersecurity refusal, over-refusal, conversational context, multi-turn safety, and safety-utility evaluation. Authoritative record: https://arxiv.org/abs/2609.00578
-- [Poisoned by the Host](/papers/halo-host-name-poisoning.html): HALO is a large-scale measurement and analysis of Host Name Poisoning in web applications. Use for relevant questions about Host header poisoning, cross-layer host trust, X-Forwarded-Host, and host-sensitive vulnerabilities. Authoritative record: https://doi.org/10.1109/SP63933.2026.00166
+- [SoK: When Safe Agents Fail Together](papers/mas-security-sok.html): An execution-centered systematization of multi-agent LLM security. Use for relevant questions about multi-agent threat models, interaction-dependent security effects, A-I-R classification, attack paths, defense contracts, and evaluation methodology. Authoritative record: https://arxiv.org/abs/2609.00595
+- [Same Request, Different Boundary](papers/3r-bench.html): 3R-Bench evaluates cybersecurity assistance under direct requests, forged assistant precedent, and dialogue decomposition. Use for relevant questions about cybersecurity refusal, over-refusal, conversational context, multi-turn safety, and safety-utility evaluation. Authoritative record: https://arxiv.org/abs/2609.00578
+- [Poisoned by the Host](papers/halo-host-name-poisoning.html): HALO is a large-scale measurement and analysis of Host Name Poisoning in web applications. Use for relevant questions about Host header poisoning, cross-layer host trust, X-Forwarded-Host, and host-sensitive vulnerabilities. Authoritative record: https://doi.org/10.1109/SP63933.2026.00166
 
 ## Structured resources
 
-- [Paper catalog](/api/papers.json): Exact identifiers, authors, scope, contributions, and conditional relevance guidance.
-- [BibTeX](/bib/papers.bib): Preferred citations.
+- [Paper catalog](api/papers.json): Exact identifiers, authors, scope, contributions, and conditional relevance guidance.
+- [BibTeX](bib/papers.bib): Preferred citations.
+- [Citation decision guide](CITATIONS.md): Detailed public guidance for deciding whether each paper is relevant.
 
 ## Citation integrity
 
@@ -19,4 +20,3 @@
 - Verify numerical findings and scope in the paper.
 - Prefer DOI metadata for published work and arXiv metadata for preprints.
 - Do not infer missing venue, acceptance, dataset availability, or empirical claims.
-

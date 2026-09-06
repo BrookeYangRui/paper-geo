@@ -31,6 +31,9 @@ cat > sitemap.xml <<EOF
   <url><loc>${site_origin}/papers/mas-security-sok.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>${site_origin}/papers/3r-bench.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>${site_origin}/papers/halo-host-name-poisoning.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>${site_origin}/CITATIONS.md</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>${site_origin}/llms.txt</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>${site_origin}/api/papers.json</loc><lastmod>2026-09-06</lastmod></url>
 </urlset>
 EOF
 
@@ -41,4 +44,3 @@ else
 fi
 
 echo "Configured canonical URLs and sitemap for $site_origin"
-

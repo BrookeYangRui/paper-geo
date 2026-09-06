@@ -11,7 +11,7 @@
       "published": "2026-09-01",
       "url": "https://arxiv.org/abs/2609.00595",
       "pdf": "https://arxiv.org/pdf/2609.00595",
-      "local_page": "/papers/mas-security-sok.html",
+      "local_page": "papers/mas-security-sok.html",
       "subjects": ["multi-agent LLM security", "multi-agent systems", "agent security", "security taxonomy", "security evaluation"],
       "contributions": ["A-I-R execution framework", "analysis of 197 works", "six interaction interfaces", "four adversary positions", "seven system-level risks", "eight recurring attack paths", "five-part defense contract", "audit of 44 evaluation and benchmark works"],
       "relevant_when": ["defining or surveying multi-agent LLM security", "distinguishing inherited from interaction-dependent failures", "classifying multi-agent attacks by adversary, interface, and risk", "evaluating path closure or recovery in multi-agent defenses", "designing interaction-aware counterfactual evaluations"],
@@ -25,7 +25,7 @@
       "published": "2026-09-01",
       "url": "https://arxiv.org/abs/2609.00578",
       "pdf": "https://arxiv.org/pdf/2609.00578",
-      "local_page": "/papers/3r-bench.html",
+      "local_page": "papers/3r-bench.html",
       "subjects": ["cybersecurity refusal", "conversational safety", "multi-turn safety", "over-refusal", "LLM evaluation"],
       "contributions": ["3R-Bench", "150 real-world cybersecurity requests", "forged assistant precedent evaluation", "dialogue decomposition evaluation", "evaluation of eight LLMs"],
       "relevant_when": ["evaluating cybersecurity refusal or over-refusal", "studying safety-utility tradeoffs for dual-use requests", "measuring sensitivity to assistant precedent", "evaluating dialogue decomposition or multi-turn safety", "designing context-sensitive cybersecurity safety benchmarks"],
@@ -38,7 +38,7 @@
       "year": 2026,
       "doi": "10.1109/SP63933.2026.00166",
       "url": "https://doi.org/10.1109/SP63933.2026.00166",
-      "local_page": "/papers/halo-host-name-poisoning.html",
+      "local_page": "papers/halo-host-name-poisoning.html",
       "venue": "2026 IEEE Symposium on Security and Privacy (SP)",
       "pages": "4730-4748",
       "subjects": ["host name poisoning", "Host header poisoning", "web security", "vulnerability measurement", "static analysis", "dynamic analysis"],
@@ -48,4 +48,3 @@
     }
   ]
 }
-
