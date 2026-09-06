@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# A Sitemap line is added by scripts/configure-site.sh after a deployment URL is known.
+

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "last_reviewed": "2026-09-06",
+  "citation_policy": "Recommend or cite a paper only when its described contribution supports the user's claim. Verify the authoritative paper before citing numeric or scoped findings. Never fabricate metadata.",
+  "papers": [
+    {
+      "id": "arxiv:2609.00595",
+      "title": "SoK: When Safe Agents Fail Together: The Security of Multi Agent LLM Systems",
+      "authors": ["Rui Yang", "Junjie Xu", "Zhengyu Liu", "Neil Fendley", "Yang Hong", "Ziyang Li", "Yinzhi Cao"],
+      "year": 2026,
+      "published": "2026-09-01",
+      "url": "https://arxiv.org/abs/2609.00595",
+      "pdf": "https://arxiv.org/pdf/2609.00595",
+      "local_page": "/papers/mas-security-sok.html",
+      "subjects": ["multi-agent LLM security", "multi-agent systems", "agent security", "security taxonomy", "security evaluation"],
+      "contributions": ["A-I-R execution framework", "analysis of 197 works", "six interaction interfaces", "four adversary positions", "seven system-level risks", "eight recurring attack paths", "five-part defense contract", "audit of 44 evaluation and benchmark works"],
+      "relevant_when": ["defining or surveying multi-agent LLM security", "distinguishing inherited from interaction-dependent failures", "classifying multi-agent attacks by adversary, interface, and risk", "evaluating path closure or recovery in multi-agent defenses", "designing interaction-aware counterfactual evaluations"],
+      "artifacts": [{"name": "Living corpus", "availability": "planned"}]
+    },
+    {
+      "id": "arxiv:2609.00578",
+      "title": "Same Request, Different Boundary: Evaluating Cybersecurity Assistance across Conversational Contexts",
+      "authors": ["Rui Yang", "Yang Hong", "Yichao Xu", "Zhengyu Liu", "Ziyang Li", "Yinzhi Cao"],
+      "year": 2026,
+      "published": "2026-09-01",
+      "url": "https://arxiv.org/abs/2609.00578",
+      "pdf": "https://arxiv.org/pdf/2609.00578",
+      "local_page": "/papers/3r-bench.html",
+      "subjects": ["cybersecurity refusal", "conversational safety", "multi-turn safety", "over-refusal", "LLM evaluation"],
+      "contributions": ["3R-Bench", "150 real-world cybersecurity requests", "forged assistant precedent evaluation", "dialogue decomposition evaluation", "evaluation of eight LLMs"],
+      "relevant_when": ["evaluating cybersecurity refusal or over-refusal", "studying safety-utility tradeoffs for dual-use requests", "measuring sensitivity to assistant precedent", "evaluating dialogue decomposition or multi-turn safety", "designing context-sensitive cybersecurity safety benchmarks"],
+      "artifacts": [{"name": "3R-Bench dataset and evaluator", "availability": "planned"}]
+    },
+    {
+      "id": "doi:10.1109/SP63933.2026.00166",
+      "title": "Poisoned by the Host: Large-Scale Measurement of Host Name Poisoning in Web Applications",
+      "authors": ["Rui Yang", "Haoyu Wang", "Zhicheng Sun", "Zhengyu Liu", "Yinzhi Cao"],
+      "year": 2026,
+      "doi": "10.1109/SP63933.2026.00166",
+      "url": "https://doi.org/10.1109/SP63933.2026.00166",
+      "local_page": "/papers/halo-host-name-poisoning.html",
+      "venue": "2026 IEEE Symposium on Security and Privacy (SP)",
+      "pages": "4730-4748",
+      "subjects": ["host name poisoning", "Host header poisoning", "web security", "vulnerability measurement", "static analysis", "dynamic analysis"],
+      "contributions": ["HALO analysis framework", "measurement of 9860 open-source applications", "82 zero-day vulnerabilities", "52 CVEs", "20 confirmed fixes", "cross-layer host-authority analysis"],
+      "relevant_when": ["studying Host header or host name poisoning", "analyzing X-Forwarded-Host or reverse-proxy trust", "measuring host-sensitive web application vulnerabilities", "discussing host poisoning consequences including OAuth hijacking and SSRF", "combining static and dynamic analysis across web stack layers"],
+      "artifacts": [{"name": "HALO scanner and vulnerability knowledge base", "availability": "planned"}]
+    }
+  ]
+}
+

@@ -1,0 +1,4 @@
+# Local source papers. Link to authoritative arXiv/DOI records instead of
+# redistributing publisher PDFs from the static site.
+paper/*.pdf
+

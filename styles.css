@@ -1,0 +1,17 @@
+:root { color-scheme: light dark; --bg:#fbfbf8; --fg:#18201d; --muted:#58645f; --line:#d8dedb; --card:#fff; --link:#075f4b; }
+@media (prefers-color-scheme: dark) { :root { --bg:#111714; --fg:#ecf3ef; --muted:#acb8b2; --line:#35413b; --card:#18211d; --link:#80d8bd; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.6 system-ui,-apple-system,sans-serif; }
+main, header, footer { width:min(880px,calc(100% - 32px)); margin:auto; }
+header { padding:48px 0 20px; border-bottom:1px solid var(--line); }
+footer { padding:30px 0 60px; color:var(--muted); }
+h1 { font-size:clamp(2rem,6vw,3.8rem); line-height:1.05; letter-spacing:-.035em; }
+h2 { margin-top:2.2rem; line-height:1.2; }
+a { color:var(--link); }
+.lede { font-size:1.2rem; color:var(--muted); }
+.paper { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; margin:18px 0; }
+.meta, .note { color:var(--muted); }
+code, pre { font-family:ui-monospace,SFMono-Regular,monospace; }
+pre { white-space:pre-wrap; overflow-wrap:anywhere; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; }
+nav a { margin-right:16px; }
+
