@@ -1,0 +1,73 @@
+name: Monitor repository traffic and site health
+
+on:
+  schedule:
+    # GitHub traffic endpoints expose a rolling 14-day window. A daily snapshot
+    # makes changes visible before they fall out of that window.
+    - cron: "17 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Collect repository traffic and public endpoint health
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SITE_URL: https://brookeyangrui.github.io/paper-geo
+        run: |
+          set -eu
+          mkdir -p monitoring
+
+          gh api "repos/${REPOSITORY}/traffic/views" > monitoring/views.json
+          gh api "repos/${REPOSITORY}/traffic/clones" > monitoring/clones.json
+          gh api "repos/${REPOSITORY}/traffic/popular/referrers" > monitoring/referrers.json
+          gh api "repos/${REPOSITORY}/traffic/popular/paths" > monitoring/paths.json
+
+          checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          health='[]'
+          for path in / /papers/mas-security-sok.html /papers/3r-bench.html /papers/halo-host-name-poisoning.html /api/papers.json /llms.txt /sitemap.xml; do
+            status=$(curl --max-time 20 --retry 2 --silent --show-error --output /dev/null --write-out '%{http_code}' "${SITE_URL}${path}")
+            health=$(jq --arg path "$path" --argjson status "$status" '. + [{path:$path,status:$status}]' <<< "$health")
+            if [ "$status" -ne 200 ]; then
+              echo "Endpoint failed: ${path} returned ${status}" >&2
+              exit 1
+            fi
+          done
+
+          jq -n \
+            --arg checked_at "$checked_at" \
+            --arg repository "$REPOSITORY" \
+            --arg site "$SITE_URL" \
+            --argjson views "$(<monitoring/views.json)" \
+            --argjson clones "$(<monitoring/clones.json)" \
+            --argjson referrers "$(<monitoring/referrers.json)" \
+            --argjson paths "$(<monitoring/paths.json)" \
+            --argjson health "$health" \
+            '{checked_at:$checked_at,repository:$repository,site:$site,traffic:{views:$views,clones:$clones,referrers:$referrers,paths:$paths},health:$health}' \
+            > monitoring/report.json
+
+          {
+            echo "## Paper Geo monitoring"
+            echo
+            echo "Checked: ${checked_at}"
+            echo
+            echo "| Metric (rolling 14 days) | Total | Unique |"
+            echo "|---|---:|---:|"
+            echo "| Repository views | $(jq '.count' monitoring/views.json) | $(jq '.uniques' monitoring/views.json) |"
+            echo "| Repository clones | $(jq '.count' monitoring/clones.json) | $(jq '.uniques' monitoring/clones.json) |"
+            echo
+            echo "All monitored public endpoints returned HTTP 200."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Store daily snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-geo-monitoring-${{ github.run_id }}
+          path: monitoring/
+          retention-days: 90
+

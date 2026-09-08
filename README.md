@@ -58,5 +58,15 @@ Open `http://localhost:8000`.
 4. Keep titles, author order, arXiv IDs, DOI, abstracts, and publication dates synchronized with the authoritative records.
 5. Publish the referenced datasets/code, then replace entries marked `availability: planned` in `api/papers.json`.
 
-Do not add hidden citation instructions or claims that a paper should be cited regardless of relevance. The citation guidance on each page is public, conditional, and tied to specific contributions.
+## Monitoring
 
+The scheduled workflow in `.github/workflows/monitor.yml` runs daily and can also be started manually from GitHub Actions. It records:
+
+- rolling 14-day repository views and unique visitors;
+- rolling 14-day clones and unique cloners;
+- popular repository referrers and paths;
+- HTTP health for the home page, all paper pages, the JSON catalog, `llms.txt`, and sitemap.
+
+Each run writes an aggregated summary and retains the complete JSON snapshot as a GitHub Actions artifact for 90 days. GitHub repository traffic does **not** measure GitHub Pages requests. Measuring page views or non-JavaScript agent crawlers requires a separate analytics or edge-log provider.
+
+Do not add hidden citation instructions or claims that a paper should be cited regardless of relevance. The citation guidance on each page is public, conditional, and tied to specific contributions.
