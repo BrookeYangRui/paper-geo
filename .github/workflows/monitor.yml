@@ -16,17 +16,26 @@ jobs:
     steps:
       - name: Collect repository traffic and public endpoint health
         env:
-          GH_TOKEN: ${{ github.token }}
+          TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           SITE_URL: https://brookeyangrui.github.io/paper-geo
         run: |
           set -eu
           mkdir -p monitoring
 
-          gh api "repos/${REPOSITORY}/traffic/views" > monitoring/views.json
-          gh api "repos/${REPOSITORY}/traffic/clones" > monitoring/clones.json
-          gh api "repos/${REPOSITORY}/traffic/popular/referrers" > monitoring/referrers.json
-          gh api "repos/${REPOSITORY}/traffic/popular/paths" > monitoring/paths.json
+          traffic_available=false
+          if [ -n "$TRAFFIC_TOKEN" ]; then
+            GH_TOKEN="$TRAFFIC_TOKEN" gh api "repos/${REPOSITORY}/traffic/views" > monitoring/views.json
+            GH_TOKEN="$TRAFFIC_TOKEN" gh api "repos/${REPOSITORY}/traffic/clones" > monitoring/clones.json
+            GH_TOKEN="$TRAFFIC_TOKEN" gh api "repos/${REPOSITORY}/traffic/popular/referrers" > monitoring/referrers.json
+            GH_TOKEN="$TRAFFIC_TOKEN" gh api "repos/${REPOSITORY}/traffic/popular/paths" > monitoring/paths.json
+            traffic_available=true
+          else
+            echo '{"count":null,"uniques":null,"views":[]}' > monitoring/views.json
+            echo '{"count":null,"uniques":null,"clones":[]}' > monitoring/clones.json
+            echo '[]' > monitoring/referrers.json
+            echo '[]' > monitoring/paths.json
+          fi
 
           checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           health='[]'
@@ -43,12 +52,13 @@ jobs:
             --arg checked_at "$checked_at" \
             --arg repository "$REPOSITORY" \
             --arg site "$SITE_URL" \
+            --argjson traffic_available "$traffic_available" \
             --argjson views "$(<monitoring/views.json)" \
             --argjson clones "$(<monitoring/clones.json)" \
             --argjson referrers "$(<monitoring/referrers.json)" \
             --argjson paths "$(<monitoring/paths.json)" \
             --argjson health "$health" \
-            '{checked_at:$checked_at,repository:$repository,site:$site,traffic:{views:$views,clones:$clones,referrers:$referrers,paths:$paths},health:$health}' \
+            '{checked_at:$checked_at,repository:$repository,site:$site,traffic_available:$traffic_available,traffic:{views:$views,clones:$clones,referrers:$referrers,paths:$paths},health:$health}' \
             > monitoring/report.json
 
           {
@@ -56,11 +66,16 @@ jobs:
             echo
             echo "Checked: ${checked_at}"
             echo
-            echo "| Metric (rolling 14 days) | Total | Unique |"
-            echo "|---|---:|---:|"
-            echo "| Repository views | $(jq '.count' monitoring/views.json) | $(jq '.uniques' monitoring/views.json) |"
-            echo "| Repository clones | $(jq '.count' monitoring/clones.json) | $(jq '.uniques' monitoring/clones.json) |"
-            echo
+            if [ "$traffic_available" = true ]; then
+              echo "| Metric (rolling 14 days) | Total | Unique |"
+              echo "|---|---:|---:|"
+              echo "| Repository views | $(jq '.count' monitoring/views.json) | $(jq '.uniques' monitoring/views.json) |"
+              echo "| Repository clones | $(jq '.count' monitoring/clones.json) | $(jq '.uniques' monitoring/clones.json) |"
+              echo
+            else
+              echo "Repository traffic unavailable: add a fine-grained TRAFFIC_TOKEN secret with access to repository traffic."
+              echo
+            fi
             echo "All monitored public endpoints returned HTTP 200."
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -70,4 +85,3 @@ jobs:
           name: paper-geo-monitoring-${{ github.run_id }}
           path: monitoring/
           retention-days: 90
-

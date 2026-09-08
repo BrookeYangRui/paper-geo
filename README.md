@@ -67,6 +67,8 @@ The scheduled workflow in `.github/workflows/monitor.yml` runs daily and can als
 - popular repository referrers and paths;
 - HTTP health for the home page, all paper pages, the JSON catalog, `llms.txt`, and sitemap.
 
-Each run writes an aggregated summary and retains the complete JSON snapshot as a GitHub Actions artifact for 90 days. GitHub repository traffic does **not** measure GitHub Pages requests. Measuring page views or non-JavaScript agent crawlers requires a separate analytics or edge-log provider.
+Each run writes an aggregated summary and retains the complete JSON snapshot as a GitHub Actions artifact for 90 days. Repository traffic collection is optional because GitHub's built-in Actions token cannot access the Traffic API; it requires a fine-grained `TRAFFIC_TOKEN` repository secret with the minimum necessary access. Site-health monitoring works without that secret.
+
+GitHub repository traffic does **not** measure GitHub Pages requests. Measuring page views or non-JavaScript agent crawlers requires a separate analytics or edge-log provider.
 
 Do not add hidden citation instructions or claims that a paper should be cited regardless of relevance. The citation guidance on each page is public, conditional, and tied to specific contributions.
